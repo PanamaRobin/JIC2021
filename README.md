@@ -1,3 +1,3 @@
-#Proyecto JIC
-##Instrucciones para clonar
+# Proyecto JIC
+## Instrucciones para clonar
 Bla bla bla.
