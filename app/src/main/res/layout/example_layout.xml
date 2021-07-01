@@ -58,7 +58,12 @@ android:orientation para configurar si es vertical u horizontal-->
         <!--elevation: le da sombra a los objetos.
             padding: es el espaciado dentro del objeto.
             margin: es el espaciado del margen del objeto
-            con respecto a los objetos a su alrededor.-->
+            con respecto a los objetos a su alrededor.
+            background: en este caso estoy haciendo referencia
+            al archivo red_button que es un archivo de fondo
+            para los botones o lo que lo necesiten, así
+            mismo hay otros, leanlos bien y vean todos los
+            archivos.-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
