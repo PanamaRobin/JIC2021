@@ -28,7 +28,7 @@ Button iniciar, registrarse, olvidopass;
             }
         });
 
-
+        iniciar=findViewById(R.id.iniciar);
 
 
     }
