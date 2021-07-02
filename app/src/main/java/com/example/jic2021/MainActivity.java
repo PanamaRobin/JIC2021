@@ -2,10 +2,13 @@ package com.example.jic2021;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
+Button iniciar, registrarse, olvidopass;
     /**
      * Login, esta seccion le toca a Josias Aponte.
      * Por favor agregar comentarios al codigo para poder visualizarlo mejor cuando haya
@@ -16,5 +19,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        registrarse=findViewById(R.id.registro);
+        registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            startActivity(new Intent (MainActivity.this,RegistroActivity.class));
+            }
+        });
+
+
+
+
     }
 }
