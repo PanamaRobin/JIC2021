@@ -16,7 +16,7 @@
         android:text="Listado de Solicitudes"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
     <!--Recycler con los items de las solicitudes-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="fill_parent"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:background="@null">
@@ -59,8 +59,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/new_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add_asset"
+            android:layout_margin="10dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/camera_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/new_button"
+            app:layout_constraintEnd_toEndOf="@+id/new_button"
+            app:srcCompat="@drawable/camera_asset" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/camera_button"
+            app:layout_constraintEnd_toEndOf="@+id/camera_button"
+            app:srcCompat="@drawable/user_asset" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--Floating Button-->
+    <!--
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
@@ -74,4 +111,6 @@
             android:src="@drawable/add_asset"
             android:tint="@color/white"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
+
 </LinearLayout>
