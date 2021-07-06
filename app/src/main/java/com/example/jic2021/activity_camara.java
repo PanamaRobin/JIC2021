@@ -65,7 +65,7 @@ public class activity_camara extends AppCompatActivity {
     }
 
     String mCurrentPhotoPath;
-
+//guardar foto en dispositivo
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -82,7 +82,7 @@ public class activity_camara extends AppCompatActivity {
 
 
 
-//mostrar foto
+//mostrar la fotos no es necesario.
     static final int REQUEST_IMAGE_CAPTURE=1;
     @Override
 
