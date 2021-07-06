@@ -61,7 +61,7 @@
                     android:src="@drawable/user_asset"/>
 
                 <EditText
-                    android:id="@+id/et_correo"
+                    android:id="@+id/et_loguser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -74,7 +74,7 @@
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textColorHint="#ccc" />
             </LinearLayout>
 
@@ -111,7 +111,7 @@
                     android:src="@drawable/password_asset" />
 
                 <EditText
-                    android:id="@+id/et_contraseña"
+                    android:id="@+id/et_logcontraseña"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -119,12 +119,13 @@
                     android:background="@null"
                     android:fontFamily="@font/poppins"
                     android:hint="Contraseña"
+                    android:inputType="textPassword"
                     android:textSize="15sp"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textColorHint="#ccc" />
             </LinearLayout>
 
@@ -160,7 +161,7 @@
 
 
             <Button
-                android:id="@+id/registro"
+                android:id="@+id/logregistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"

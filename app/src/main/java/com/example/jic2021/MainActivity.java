@@ -20,17 +20,20 @@ Button iniciar, registrarse, olvidopass;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        registrarse=findViewById(R.id.registro);
+        iniciar=findViewById(R.id.iniciar);
+        iniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,RegistroActivity.class));
+            }
+        });
+        registrarse=findViewById(R.id.logregistro);
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            startActivity(new Intent (MainActivity.this,RegistroActivity.class));
+                startActivity(new Intent (MainActivity.this,RegistroActivity.class));
             }
         });
-
-        iniciar=findViewById(R.id.iniciar);
-
-
 
     }
 }
