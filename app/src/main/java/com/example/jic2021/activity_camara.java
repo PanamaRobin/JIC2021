@@ -65,7 +65,7 @@ public class activity_camara extends AppCompatActivity {
     }
 
     String mCurrentPhotoPath;
-//guardar foto en dispositivo
+//guardar foto en dispositivo movil. Esto no es necesario.
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
