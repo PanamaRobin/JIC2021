@@ -36,7 +36,7 @@ public class activity_camara extends AppCompatActivity {
     }
 
 
-//me falta el area cuando se tenga que enviar la foto a x lugar.
+//me falta el area cuando se tenga que enviar la foto a la base de datos.
 //toma la foto
     static final int REQUEST_TAKE_PHOTO = 1;
 
