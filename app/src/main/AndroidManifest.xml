@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jic2021">
-
+<!--permisos-->
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
 
-
+<!--en version del desarrollador se escribe el:android:name="android.support.v4.content.FileProvider" -->
         <provider
 
             android:name="androidx.core.content.FileProvider"

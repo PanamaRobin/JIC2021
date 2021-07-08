@@ -35,7 +35,7 @@ public class activity_camara extends AppCompatActivity {
 
     }
 
-
+//fuente de donde se obtuvo el codigo: https://developer.android.com/training/camera/photobasics?hl=es-419
 //me falta el area cuando se tenga que enviar la foto a la base de datos
 //toma la foto
     static final int REQUEST_TAKE_PHOTO = 1;
