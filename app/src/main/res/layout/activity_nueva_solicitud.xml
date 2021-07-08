@@ -6,4 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".NuevaSolicitudActivity">
 
+    <ImageButton
+        android:id="@+id/bt_camara"
+        android:layout_width="68dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="132dp"
+        android:background="@android:color/transparent"
+        android:onClick="tomarFotos"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/camera_asset" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="125dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="104dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/imagen" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
