@@ -69,7 +69,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/add_asset"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:backgroundTint="#4CBB18"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/camera_button"
