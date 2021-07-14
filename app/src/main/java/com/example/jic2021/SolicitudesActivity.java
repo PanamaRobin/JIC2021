@@ -1,6 +1,8 @@
 package com.example.jic2021;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -20,12 +22,26 @@ public class SolicitudesActivity extends AppCompatActivity {
     FloatingActionButton float1, float2, float3;
     Animation closeAnim, openAnim, fromBottom, toBottom;
 
+    //Declaracion de RecyclerView de la vista
+    RecyclerView recyclerView;
+
+    //Declaracion del RecyclerAdapter
+    RecyclerAdapter recyclerAdapter;
+
     boolean isVisible = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
+
+        //RecyclerView y RecyclerAdapter
+        recyclerView = findViewById(R.id.solicitudesRecycler);
+        recyclerAdapter = new RecyclerAdapter();
+
+        //Inicializacion de la vista del adapter dentro del recyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(recyclerAdapter);
 
         //Floating action buttons
         float1 = (FloatingActionButton) findViewById(R.id.new_button);
