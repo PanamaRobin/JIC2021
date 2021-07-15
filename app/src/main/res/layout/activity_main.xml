@@ -37,7 +37,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="center_horizontal"
-                android:text="Introduzca su usuario"
+                android:text="Introduzca su correo"
                 android:textColor="#686868"
                 android:textSize="15dp" />
 
@@ -58,7 +58,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="-25dp"
-                    android:src="@drawable/user_asset"/>
+                    android:src="@drawable/mail_asset"/>
 
                 <EditText
                     android:id="@+id/et_loguser"
@@ -68,7 +68,7 @@
                     android:layout_marginRight="40dp"
                     android:background="@null"
                     android:fontFamily="@font/poppins"
-                    android:hint="Usuario"
+                    android:hint="Correo"
                     android:inputType="text"
                     android:textSize="15sp"
                     android:paddingLeft="10dp"
