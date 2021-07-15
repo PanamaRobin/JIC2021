@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistroActivity">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,71 +20,20 @@
 
         <LinearLayout
             android:layout_width="350dp"
-            android:layout_height="626dp"
+            android:layout_height="607dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/white_button"
             android:elevation="3dp"
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginLeft="-35dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="180dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/poppins"
-                android:gravity="center_horizontal"
-                android:text="Usuario"
-                android:textColor="#686868"
-                android:textSize="15dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/white_button"
-                android:elevation="3dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="-25dp"
-                    android:src="@drawable/user_asset" />
-
-                <EditText
-                    android:id="@+id/et_reguser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:background="@null"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Usuario"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="#000000"
-                    android:textColorHint="#ccc"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginLeft="-37dp"
-
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/poppins"
@@ -91,6 +41,7 @@
                 android:text="Cédula"
                 android:textColor="#686868"
                 android:textSize="15sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,9 +68,9 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:background="@null"
-                    android:inputType="textEmailAddress"
                     android:fontFamily="@font/poppins"
                     android:hint="Cédula"
+                    android:inputType="text"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
@@ -128,6 +79,7 @@
                     android:textColorHint="#ccc"
                     android:textSize="15sp" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -168,9 +120,9 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:background="@null"
-                    android:inputType="textEmailAddress"
                     android:fontFamily="@font/poppins"
                     android:hint="Correo"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
@@ -221,6 +173,8 @@
                     android:background="@null"
                     android:fontFamily="@font/poppins"
                     android:hint="Teléfono"
+                    android:inputType="phone"
+                    android:maxLength="8"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
@@ -271,6 +225,7 @@
                     android:background="@null"
                     android:fontFamily="@font/poppins"
                     android:hint="Contraseña"
+                    android:inputType="textPassword"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
@@ -285,7 +240,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/register_button"
@@ -304,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="-15dp"
+                android:layout_marginTop="-10dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/red_button"
@@ -324,7 +279,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/poppins"
         android:gravity="center_horizontal"
@@ -332,5 +287,4 @@
         android:text="Registro"
         android:textColor="#000000"
         android:textSize="35sp" />
-
 </RelativeLayout>
