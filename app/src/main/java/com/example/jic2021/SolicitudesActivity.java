@@ -5,11 +5,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.example.jic2021.entities.Reportes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SolicitudesActivity extends AppCompatActivity {
 
@@ -28,6 +37,13 @@ public class SolicitudesActivity extends AppCompatActivity {
     //Declaracion del RecyclerAdapter
     RecyclerAdapter recyclerAdapter;
 
+    //Para la autenticacion de los endpoints
+    public String base = "user" + ":" + "admin";
+    public final String authHeader = "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
+
+    //Lista de reportes que se envia al adapter
+    public List<Reportes> listaFinalReportes;
+
     boolean isVisible = true;
 
     @Override
@@ -35,8 +51,12 @@ public class SolicitudesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
 
+        obtenerReportes(authHeader);
+
         //RecyclerView y RecyclerAdapter
         recyclerView = findViewById(R.id.solicitudesRecycler);
+
+        //TODO: Enviar lista reportes y cargar items en adapter
         recyclerAdapter = new RecyclerAdapter();
 
         //Inicializacion de la vista del adapter dentro del recyclerView
@@ -58,6 +78,32 @@ public class SolicitudesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 animateFab();
+            }
+        });
+    }
+
+    public void obtenerReportes(String authHeader) {
+        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReportes(authHeader);
+        listR.enqueue(new Callback<List<Reportes>>() {
+            @Override
+            public void onResponse(Call<List<Reportes>> call, Response<List<Reportes>> response) {
+                try{
+
+                    if(response.isSuccessful())
+                    {
+                        Log.d("a","entreeeeeeeeeeeee");
+
+                        //Aqui se carga la lista de reportes
+                        listaFinalReportes = response.body();
+                    }
+                }catch (NullPointerException e){
+                    //TODO: Capturar excepciones
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Reportes>> call, Throwable t) {
+                Log.e("Falloooo", t.getLocalizedMessage());
             }
         });
     }
