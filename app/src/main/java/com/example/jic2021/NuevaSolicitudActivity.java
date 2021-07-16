@@ -23,7 +23,7 @@ import android.widget.Toast;
 public class NuevaSolicitudActivity extends AppCompatActivity {
 
     /**
-     * Nueva Solicitud, esta seccion le toca a Jorge Morales.
+     * Nueva Solicitud, esta seccio le toca a Jorge Morales.
      * Por favor agregar comentarios al codigo para poder visualizarlo mejor cuando haya
      * que juntarlo.
      * @param savedInstanceState
