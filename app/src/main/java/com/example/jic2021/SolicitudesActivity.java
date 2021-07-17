@@ -57,7 +57,7 @@ public class SolicitudesActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.solicitudesRecycler);
 
         //TODO: Enviar lista reportes y cargar items en adapter
-        recyclerAdapter = new RecyclerAdapter();
+        recyclerAdapter = new RecyclerAdapter(listaFinalReportes);
 
         //Inicializacion de la vista del adapter dentro del recyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
