@@ -217,7 +217,7 @@
                     android:src="@drawable/password_asset" />
 
                 <EditText
-                    android:id="@+id/et_regcontraseña2"
+                    android:id="@+id/et_regcontraseña"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -243,10 +243,12 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/register_button"
+                android:background="@drawable/blue_button"
                 android:elevation="5dp"
+                android:textSize="15sp"
                 android:fontFamily="@font/poppins"
                 android:inputType="text"
+                android:onClick="Registrar"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
                 android:text="Registrarse"
@@ -269,6 +271,7 @@
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
                 android:text="Cancelar"
+                android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 app:backgroundTint="#BB1818" />

@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JIC2021">
-        <activity android:name=".NuevaSolicitudActivity"></activity>
+        <activity android:name=".ExitosoActivity"></activity>
+        <activity android:name=".NuevaSolicitudActivity" />
         <activity android:name=".SolicitudesActivity" />
-        <activity android:name=".RegistroActivity"/>
+        <activity android:name=".RegistroActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -142,11 +142,12 @@
                 android:background="@drawable/login_button"
                 android:elevation="5dp"
                 android:fontFamily="@font/poppins"
+                android:inputType="text"
+                android:onClick="Enviar"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
                 android:text="Iniciar Sesión"
                 android:textColor="#FFFFFF"
-                android:inputType="text"
                 android:textStyle="bold"
                 app:backgroundTint="#1BA628" />
 
@@ -192,6 +193,14 @@
                 android:textStyle="bold"
                 android:textColor="#030CBD" />
 
+            <ImageButton
+                android:layout_width="35dp"
+                android:layout_height="37dp"
+                android:id="@+id/salir"
+                android:layout_gravity="start"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/exit_asset" />
 
         </LinearLayout>
     </LinearLayout>
