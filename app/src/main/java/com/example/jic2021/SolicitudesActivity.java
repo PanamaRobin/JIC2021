@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.jic2021.entities.Reportes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,13 +26,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SolicitudesActivity extends AppCompatActivity {
+public class SolicitudesActivity extends AppCompatActivity implements RecyclerAdapter.OnItemListener {
 
     /**
      * Vista de Solicitudes, esta seccion le toca a Jorge Herrera.
      * Por favor agregar comentarios al codigo para poder visualizarlo mejor cuando haya
      * que juntarlo.
      */
+
+    //Dialog que despliega los datos de la solicitud
+    Dialog solicitud_dialog;
 
     FloatingActionButton float1, float2, float3;
     Animation closeAnim, openAnim, fromBottom, toBottom;
@@ -56,8 +65,11 @@ public class SolicitudesActivity extends AppCompatActivity {
         //RecyclerView y RecyclerAdapter
         recyclerView = findViewById(R.id.solicitudesRecycler);
 
-        //TODO: Enviar lista reportes y cargar items en adapter
+        //Se envia la lista de reportes al adapter
         recyclerAdapter = new RecyclerAdapter(listaFinalReportes);
+
+        //Inicializacion del dialog
+        solicitud_dialog = new Dialog(this);
 
         //Inicializacion de la vista del adapter dentro del recyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -108,6 +120,7 @@ public class SolicitudesActivity extends AppCompatActivity {
         });
     }
 
+    //Animacion del boton flotante
     private void animateFab(){
         if(isVisible) {
             float1.startAnimation(openAnim);
@@ -121,5 +134,36 @@ public class SolicitudesActivity extends AppCompatActivity {
             isVisible = true;
         }
 
+    }
+
+    @Override
+    public void OnItemClick(int position) {
+        openSolicitudDialog();
+    }
+
+    private void openSolicitudDialog() {
+        setContentView(R.layout.solicitud_dialog);
+        solicitud_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //Declaracion de elementos dentro del dialog
+        ImageView solicitud_image = solicitud_dialog.findViewById(R.id.solicitud_image);
+        Button solicitud_button = solicitud_dialog.findViewById(R.id.aceptar_btn);
+        TextView solicitud_title = solicitud_dialog.findViewById(R.id.solicitud_title);
+        TextView descripcion_solicitud = solicitud_dialog.findViewById(R.id.descripcion_solicitud);
+        TextView fecha_solicitud = solicitud_dialog.findViewById(R.id.fecha_solicitud);
+        TextView estado_solicitud = solicitud_dialog.findViewById(R.id.estado_solicitud);
+
+        //TODO: Rellenar las variables creadas con la API
+
+        //Boton de aceptar cierra el dialog
+        solicitud_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                solicitud_dialog.dismiss();
+            }
+        });
+
+        //Despliegue del dialog
+        solicitud_dialog.show();
     }
 }

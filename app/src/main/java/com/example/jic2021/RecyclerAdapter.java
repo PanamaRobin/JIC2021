@@ -67,7 +67,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     //Dentro del viewHolder se encuentran todos los objetos dentro de la vista del item
-    class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView id_solicitud, fecha_solicitud;
         ImageView estado;
@@ -76,8 +76,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(itemView);
 
             estado = itemView.findViewById(R.id.estado);
-            id_solicitud = itemView.findViewById(R.id.id_solicitud);
+            id_solicitud = itemView.findViewById(R.id.solicitud_title);
             fecha_solicitud = itemView.findViewById(R.id.fecha_solicitud);
         }
+    }
+
+    public interface OnItemListener{
+        void OnItemClick(int position);
     }
 }
