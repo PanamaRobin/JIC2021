@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="#B9AFF7"
         android:scaleType="centerCrop"/>
 
     <LinearLayout
@@ -19,14 +19,19 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="315dp"
-            android:layout_height="203dp"
+            android:layout_width="314dp"
+            android:layout_height="270dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/white_button"
             android:elevation="3dp"
             android:gravity="center"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:background="@drawable/completed_asset"
+                android:backgroundTint="#4CBB18" />
 
             <TextView
                 android:layout_width="match_parent"

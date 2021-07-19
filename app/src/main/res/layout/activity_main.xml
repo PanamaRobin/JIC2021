@@ -61,11 +61,10 @@
                     android:src="@drawable/mail_asset"/>
 
                 <EditText
-                    android:id="@+id/et_loguser"
+                    android:id="@+id/et_logcorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
                     android:background="@null"
                     android:fontFamily="@font/poppins"
                     android:hint="Correo"
@@ -116,7 +115,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
                     android:background="@null"
                     android:fontFamily="@font/poppins"
                     android:hint="Contraseña"
@@ -143,7 +141,7 @@
                 android:elevation="5dp"
                 android:fontFamily="@font/poppins"
                 android:inputType="text"
-                android:onClick="Enviar"
+                android:onClick="agregar"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
                 android:text="Iniciar Sesión"
@@ -185,22 +183,12 @@
                 android:id="@+id/olvidopass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins"
                 android:text="¿Olvidó su contraseña?"
                 android:inputType="text"
                 android:textStyle="bold"
                 android:textColor="#030CBD" />
-
-            <ImageButton
-                android:layout_width="35dp"
-                android:layout_height="37dp"
-                android:id="@+id/salir"
-                android:layout_gravity="start"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/exit_asset" />
 
         </LinearLayout>
     </LinearLayout>
