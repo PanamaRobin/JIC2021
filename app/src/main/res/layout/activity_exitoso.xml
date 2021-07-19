@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExitosoActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B9AFF7"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="#d8000000"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="314dp"
+            android:layout_height="270dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/white_button"
+            android:elevation="3dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:background="@drawable/completed_asset"
+                android:backgroundTint="#4CBB18" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:elevation="3dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:text="Registro Exitoso!"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/aceptar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:background="@drawable/green_button"
+                android:elevation="5dp"
+                android:fontFamily="@font/poppins"
+                android:inputType="text"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:text="Aceptar"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:backgroundTint="#1BA628" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
