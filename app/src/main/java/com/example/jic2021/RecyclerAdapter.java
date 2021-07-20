@@ -22,8 +22,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //Lista de Reportes
     private List<Reportes> listaReportes;
 
-    public RecyclerAdapter(List<Reportes> listaReportes) {
+    //OnItemListener es cargado dentro del adapter y enviado al constructor
+    private OnItemListener onItemListener;
+
+    public RecyclerAdapter(List<Reportes> listaReportes, OnItemListener onItemListener) {
         this.listaReportes = listaReportes;
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
@@ -33,7 +37,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         View view = layoutInflater.inflate(R.layout.solicitudes_item, parent, false);
 
         //Se crea una instancia del viewHolder que va a contener el item que le estamos enviando
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, onItemListener);
 
         return viewHolder;
     }
@@ -67,21 +71,36 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     //Dentro del viewHolder se encuentran todos los objetos dentro de la vista del item
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView id_solicitud, fecha_solicitud;
         ImageView estado;
 
-        public ViewHolder(@NonNull View itemView) {
+        //Listener del item
+        OnItemListener onItemListener;
+
+        public ViewHolder(@NonNull View itemView, OnItemListener onItemListener) {
             super(itemView);
 
             estado = itemView.findViewById(R.id.estado);
             id_solicitud = itemView.findViewById(R.id.solicitud_title);
             fecha_solicitud = itemView.findViewById(R.id.fecha_solicitud);
+
+            //Se iguala el onItemListener en el constructor al de cada item
+            this.onItemListener = onItemListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            //Se encarga de utilizar el metodo para conseguir la posicion del adapter dentro del recyclerView
+            onItemListener.onItemClick(getAdapterPosition());
         }
     }
 
+    //Interfaz que se encarga de manejar el click de cada item
     public interface OnItemListener{
-        void OnItemClick(int position);
+        void onItemClick(int position);
     }
 }
