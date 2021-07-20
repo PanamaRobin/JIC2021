@@ -26,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//Se implementa la interfaz dentro del adapter
 public class SolicitudesActivity extends AppCompatActivity implements RecyclerAdapter.OnItemListener {
 
     /**
@@ -65,8 +66,8 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         //RecyclerView y RecyclerAdapter
         recyclerView = findViewById(R.id.solicitudesRecycler);
 
-        //Se envia la lista de reportes al adapter
-        recyclerAdapter = new RecyclerAdapter(listaFinalReportes);
+        //Se envia la lista de reportes al adapter y se carga la interfaz que fue implementada
+        recyclerAdapter = new RecyclerAdapter(listaFinalReportes, this);
 
         //Inicializacion del dialog
         solicitud_dialog = new Dialog(this);
@@ -86,6 +87,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
         toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
 
+        //Boton flotante con su animacion
         float1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +96,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         });
     }
 
+    //Metodo que se encarga de llamar a la API
     public void obtenerReportes(String authHeader) {
         Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReportes(authHeader);
         listR.enqueue(new Callback<List<Reportes>>() {
@@ -136,12 +139,18 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
 
     }
 
+    //Metodo implementado desde la interfaz en el adapter
     @Override
-    public void OnItemClick(int position) {
-        openSolicitudDialog();
+    public void onItemClick(int position) {
+        //Se cargan las variables que se mostraran dentro del dialog
+        String id = listaFinalReportes.get(position).getIdentificador();
+        String descripcion = listaFinalReportes.get(position).getDescripcion();
+        String fecha = listaFinalReportes.get(position).getFechaString();
+        String estado = listaFinalReportes.get(position).getEstado();
+        openSolicitudDialog(id, descripcion, fecha, estado);
     }
 
-    private void openSolicitudDialog() {
+    private void openSolicitudDialog(String id, String descripcion, String fecha, String estado) {
         setContentView(R.layout.solicitud_dialog);
         solicitud_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -153,7 +162,27 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         TextView fecha_solicitud = solicitud_dialog.findViewById(R.id.fecha_solicitud);
         TextView estado_solicitud = solicitud_dialog.findViewById(R.id.estado_solicitud);
 
-        //TODO: Rellenar las variables creadas con la API
+        //Se cargan las variables dentro del dialog
+        solicitud_title.setText(solicitud_title.getText()+id);
+        descripcion_solicitud.setText(descripcion);
+        fecha_solicitud.setText(fecha);
+
+        switch(estado){
+            case "Finalizado":
+                estado_solicitud.setText(estado);
+                estado_solicitud.setBackgroundResource(R.drawable.login_button);
+                break;
+            case "Pendiente":
+                estado_solicitud.setText(estado);
+                estado_solicitud.setBackgroundResource(R.drawable.yellow_rounded_button);
+                break;
+            case "Rechazado":
+                estado_solicitud.setText(estado);
+                estado_solicitud.setBackgroundResource(R.drawable.red_rounded_button);
+                break;
+            default:
+                break;
+        }
 
         //Boton de aceptar cierra el dialog
         solicitud_button.setOnClickListener(new View.OnClickListener() {
