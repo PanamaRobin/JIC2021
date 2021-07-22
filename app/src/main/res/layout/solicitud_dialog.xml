@@ -121,14 +121,15 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/green_button"
+        android:elevation="3dp"
         android:fontFamily="@font/poppins_semibold"
+        android:hint="Aceptar"
+        android:textColorHint="#FFF"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/estado_solicitud"
-        android:hint="Aceptar"
-        android:textColorHint="#FFF"
-        android:elevation="3dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/estado_solicitud" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

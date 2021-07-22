@@ -4,14 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -58,7 +61,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
      */
 
     //Dialog que despliega los datos de la solicitud
-    Dialog solicitud_dialog;
+    Dialog solicitud_dialog1;
 
     FloatingActionButton float1, float2, float3;
     Animation closeAnim, openAnim, fromBottom, toBottom;
@@ -89,6 +92,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static String filenameimagen;
 
+    public static String id, descripcion,fecha,estado;
     String idUsuario;
 
     @Override
@@ -107,7 +111,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
 
 
         //Inicializacion del dialog
-        solicitud_dialog = new Dialog(this);
+        solicitud_dialog1 = new Dialog(this);
 
         //Inicializacion de la vista del adapter dentro del recyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -283,37 +287,43 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     @Override
     public void onItemClick(int position) {
         //Se cargan las variables que se mostraran dentro del dialog
-        String id = listaFinalReportes.get(position).getIdentificador();
-        String descripcion = listaFinalReportes.get(position).getDescripcion();
-        String fecha = listaFinalReportes.get(position).getFechaString();
-        //String estado = listaFinalReportes.get(position).getEstado();
-        Log.d("aa",id+" "+descripcion+" "+fecha);
-        openSolicitudDialog(id, descripcion, fecha);
+        id = listaFinalReportes.get(position).getIdentificador();
+        descripcion = listaFinalReportes.get(position).getDescripcion();
+        fecha = listaFinalReportes.get(position).getFechaString();
+        estado = listaFinalReportes.get(position).getEstado();
+        Log.d("aa",id+" "+descripcion+" "+fecha+" "+estado);
+        openSolicitudDialog();
     }
 
-    private void openSolicitudDialog(String id, String descripcion, String fecha) {
-        setContentView(R.layout.solicitud_dialog);
-        solicitud_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    public void openSolicitudDialog() {
 
+        //setContentView(R.layout.solicitud_dialog);
+        //solicitud_dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        View dia= getLayoutInflater().inflate(R.layout.solicitud_dialog,null);
+        builder.setView(dia);
+        //dia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Log.d("aa",id+" "+descripcion+" "+fecha+" "+estado);
         //Declaracion de elementos dentro del dialog
-        ImageView solicitud_image = solicitud_dialog.findViewById(R.id.solicitud_image);
-        Button solicitud_button = solicitud_dialog.findViewById(R.id.aceptar_btn);
-        TextView solicitud_title = solicitud_dialog.findViewById(R.id.solicitud_title);
-        TextView descripcion_solicitud = solicitud_dialog.findViewById(R.id.descripcion_solicitud);
-        TextView fecha_solicitud = solicitud_dialog.findViewById(R.id.fecha_solicitud);
-        TextView estado_solicitud = solicitud_dialog.findViewById(R.id.estado_solicitud);
+        ImageView solicitud_image = dia.findViewById(R.id.solicitud_image);
+        Button solicitud_button = dia.findViewById(R.id.aceptar_btn);
+        TextView solicitud_title = dia.findViewById(R.id.solicitud_title);
+        TextView descripcion_solicitud = dia.findViewById(R.id.descripcion_solicitud);
+        TextView fecha_solicitud = dia.findViewById(R.id.fecha_solicitud);
+        TextView estado_solicitud = dia.findViewById(R.id.estado_solicitud);
 
         //Se cargan las variables dentro del dialog
         solicitud_title.setText(id);
         descripcion_solicitud.setText(descripcion);
         fecha_solicitud.setText(fecha);
 
-       /* switch(estado){
+       switch(estado){
             case "Finalizado":
                 estado_solicitud.setText(estado);
                 estado_solicitud.setBackgroundResource(R.drawable.login_button);
                 break;
-            case "Pendiente":
+            case "Nuevo":
                 estado_solicitud.setText(estado);
                 estado_solicitud.setBackgroundResource(R.drawable.yellow_rounded_button);
                 break;
@@ -323,17 +333,24 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 break;
             default:
                 break;
-        }*/
+        }
 
         //Boton de aceptar cierra el dialog
-        solicitud_button.setOnClickListener(new View.OnClickListener() {
+        /*solicitud_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                solicitud_dialog.dismiss();
+                solicitud_dialog1.dismiss();
+            }
+        });*/
+        //Este crea un botoncito feo a parte inferior izquierda pero funciona xd
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
             }
         });
-
+        builder.create().show();
         //Despliegue del dialog
-        solicitud_dialog.show();
+        //solicitud_dialog1.show();
     }
 }
