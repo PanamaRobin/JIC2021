@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import com.example.jic2021.entities.Usuario;
+import com.example.jic2021.entities.Usuarios;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,47 +40,46 @@ EditText logcorreo, logpass;
             }
         });
     }
-public void agregar(View v){
-        if(validar()){
-            Toast.makeText(this, "Procesando...", Toast.LENGTH_LONG).show();
-            inicioUsuario();
-        }
-}
-        /**public void Enviar (View v){
-        if(logcorreo.getText().toString().isEmpty()){
-            Toast.makeText(this, "Campo cédula vacío", Toast.LENGTH_LONG).show();
-        }else{
-            if(logpass.getText().toString().isEmpty()){
-            Toast.makeText(this,"Campo contraseña vacío", Toast.LENGTH_LONG).show();
-        }else{
-          Toast.makeText(this, "Inicio de Sesion exitoso", Toast.LENGTH_LONG).show();
-          inicioUsuario();
+    public void agregar(View v){
+            if(validar()){
+                Toast.makeText(this, "Procesando...", Toast.LENGTH_LONG).show();
+                inicioUsuario();
             }
-        }
-    }*/
+    }
     public void inicioUsuario(){
-        Usuario user = new Usuario();
+        Usuarios user = new Usuarios();
         user.setEmail(AES.encrypt(logcorreo.getText().toString(),"64aes64"));
         user.setContrasena(AES.encrypt(logpass.getText().toString(),"64aes64"));
-        Call<Usuario> calluser = API.conexionUsuario().checkUsuario(user, authHeader);
-        calluser.enqueue(new Callback<Usuario>() {
+        Call<Usuarios> calluser = ApiConnection.conexionUsuario().checkUsuario(user, authHeader);
+        calluser.enqueue(new Callback<Usuarios>() {
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+            public void onResponse(Call<Usuarios> call, Response<Usuarios> response) {
+                Log.d("error","Entre");
                 try{
                     if(response.isSuccessful()){
-                        Usuario u= response.body();
+                        Log.d("usuario","Entre");
+                        Usuarios u= response.body();
                         if(u.isActivo()) {
-                            startActivity(new Intent(MainActivity.this, SolicitudesActivity.class));
+                            Intent intent = new Intent(MainActivity.this,SolicitudesActivity.class);
+                            intent.putExtra("idUsuario", u.getIdentificador());
+                            startActivity(intent);
+                            //startActivity(new Intent(MainActivity.this, SolicitudesActivity.class));
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "Usuario no existe", Toast.LENGTH_LONG).show();
                         }
                     }
+                    else{
+                        Toast.makeText(MainActivity.this, "Usuario no existe", Toast.LENGTH_LONG).show();
+                    }
                 }catch(NullPointerException e){
-
+                    Toast.makeText(MainActivity.this,  e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-
+            public void onFailure(Call<Usuarios> call, Throwable t) {
+                Toast.makeText(MainActivity.this,  t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

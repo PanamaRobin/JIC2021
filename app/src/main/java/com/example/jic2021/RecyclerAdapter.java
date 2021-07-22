@@ -53,7 +53,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             case "Finalizado":
                 holder.estado.setImageResource(R.drawable.completed_asset);
                 break;
-            case "Pendiente":
+            case "Nuevo":
                 holder.estado.setImageResource(R.drawable.pending_asset);
                 break;
             case "Rechazado":

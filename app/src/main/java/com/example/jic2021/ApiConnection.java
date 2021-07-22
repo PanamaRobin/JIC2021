@@ -1,6 +1,7 @@
 package com.example.jic2021;
 
 import com.example.jic2021.interfaces.IReportes;
+import com.example.jic2021.interfaces.IUsuario;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,6 +23,10 @@ public class ApiConnection {
     public static IReportes obtReportes()
     {
         final IReportes url = obt_retrofit().create(IReportes.class);
+        return url;
+    }
+    public static IUsuario conexionUsuario(){
+        final IUsuario url = obt_retrofit().create(IUsuario.class);
         return url;
     }
 }

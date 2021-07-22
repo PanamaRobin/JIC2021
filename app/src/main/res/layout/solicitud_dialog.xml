@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Solicitud "
+        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000"
         app:layout_constraintEnd_toEndOf="parent"

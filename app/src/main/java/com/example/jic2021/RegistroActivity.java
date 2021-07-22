@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.jic2021.entities.Usuario;
+import com.example.jic2021.entities.Usuarios;
 
 import java.util.regex.Pattern;
 
@@ -44,45 +44,17 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
-    /**public void Registrar(View v){
-        if(cedula.getText().toString().isEmpty()){
-            Toast.makeText(this, "Campo cédula vacío", Toast.LENGTH_LONG).show();
-        }else{
-            if(nombre.getText().toString().isEmpty()){
-                Toast.makeText(this, "Campo nombre vacío", Toast.LENGTH_LONG).show();
-            }else{
-                if(correo.getText().toString().isEmpty()){
-                    Toast.makeText(this, "Campo correo vacío", Toast.LENGTH_LONG).show();
-                }else{
-                    if(telefono.getText().toString().isEmpty()){
-                        Toast.makeText(this, "Campo teléfono vacío", Toast.LENGTH_LONG).show();
-                    }else{
-                        if(pass.getText().toString().isEmpty()){
-                            Toast.makeText(this, "Campo contraseña vacío", Toast.LENGTH_LONG).show();
-                        }else{
-                            if(!validarEmail(correo.getText().toString())){
-                                Toast.makeText(this, "Correo incorrecto", Toast.LENGTH_LONG).show();
-                            }else{
-                                registro();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
-
     public void registro(){
-        Usuario user = new Usuario();
+        Usuarios user = new Usuarios();
         user.setIdentificador(AES.encrypt(cedula.getText().toString(),"64aes64"));
         user.setNombre(AES.encrypt(nombre.getText().toString(),"64aes64"));
         user.setEmail(AES.encrypt(correo.getText().toString(),"64aes64"));
         user.setTelefono(AES.encrypt(telefono.getText().toString(),"64aes64"));
         user.setContrasena(AES.encrypt(pass.getText().toString(),"64aes64"));
-        Call<Usuario> calluser = API.conexionUsuario().crearUsuario(user, authHeader);
-        calluser.enqueue(new Callback<Usuario>() {
+        Call<Usuarios> calluser = ApiConnection.conexionUsuario().crearUsuario(user, authHeader);
+        calluser.enqueue(new Callback<Usuarios>() {
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+            public void onResponse(Call<Usuarios> call, Response<Usuarios> response) {
                 try{
                     if(response.isSuccessful()){
                         registroDialogo();
@@ -93,7 +65,7 @@ public class RegistroActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
+            public void onFailure(Call<Usuarios> call, Throwable t) {
 
             }
         });

@@ -95,6 +95,7 @@
             app:layout_constraintBottom_toTopOf="@+id/camera_button"
             app:layout_constraintEnd_toEndOf="@+id/camera_button"
             app:srcCompat="@drawable/user_asset" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--Floating Button-->

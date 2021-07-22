@@ -1,13 +1,28 @@
 package com.example.jic2021;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -16,10 +31,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jic2021.entities.Reportes;
+import com.example.jic2021.entities.Usuarios;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,29 +74,44 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     public final String authHeader = "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
 
     //Lista de reportes que se envia al adapter
-    public List<Reportes> listaFinalReportes;
+    public static List<Reportes> listaFinalReportes;
 
     boolean isVisible = true;
+
+    private static final int REQUEST_PERMISSION_CAMERA=100;
+    private static final int REQUEST_IMAGE_CAMERA=101;
+
+    public ContentValues values;
+    public Uri imageUri;
+    public static Bitmap bitmap;
+    String imageurl;
+    String currentPhotoPath;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static String filenameimagen;
+
+    String idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
 
-        obtenerReportes(authHeader);
+        idUsuario = getIntent().getStringExtra("idUsuario");
+        //Log.d("idUsuario",idUsuario);
+        obtenerReportes();
+
 
         //RecyclerView y RecyclerAdapter
         recyclerView = findViewById(R.id.solicitudesRecycler);
 
-        //Se envia la lista de reportes al adapter y se carga la interfaz que fue implementada
-        recyclerAdapter = new RecyclerAdapter(listaFinalReportes, this);
+
 
         //Inicializacion del dialog
         solicitud_dialog = new Dialog(this);
 
         //Inicializacion de la vista del adapter dentro del recyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(recyclerAdapter);
+
 
         //Floating action buttons
         float1 = (FloatingActionButton) findViewById(R.id.new_button);
@@ -94,11 +131,105 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 animateFab();
             }
         });
+        //Para la Camara
+        float3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if(ActivityCompat.checkSelfPermission(SolicitudesActivity.this, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED){
+                        goTocamera();
+                    }
+                    else {
+                        ActivityCompat.requestPermissions(SolicitudesActivity.this,new String[]{Manifest.permission.CAMERA},REQUEST_PERMISSION_CAMERA);
+                    }
+                }
+                else{
+                    goTocamera();
+                }
+            }
+        });
+    }
+    //Camara
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==REQUEST_PERMISSION_CAMERA){
+            if(permissions.length >0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                goTocamera();
+            }
+            else{
+                Toast.makeText(this,"Necesita Habilitar los Permisos",Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==REQUEST_IMAGE_CAMERA){
+            if(resultCode== Activity.RESULT_OK){
+                try {
+                    bitmap=MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+
+                    //Obtiene la ruta donde se encuentra guardada la imagen.
+                    imageurl = getRealPathFromURI(imageUri);
+                    Log.i("TAG","result>=" +bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //jose
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String imageFileName = "JPEG_" + timeStamp + "_";
+                filenameimagen=imageFileName+".jpg";
+                Log.i("TAG",filenameimagen);
+
+                //Envio la imagen a la otra actividad
+                try {
+                    //Write file
+                    String filename = filenameimagen;
+                    FileOutputStream stream = this.openFileOutput(filename, Context.MODE_PRIVATE);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+                    //Cleanup
+                    stream.close();
+                    bitmap.recycle();
+
+                    //Pop intent
+                    Intent in1 = new Intent(this, NuevaSolicitudActivity.class);
+                    in1.putExtra("imagen", filename);
+                    in1.putExtra("idUsuario",idUsuario);
+                    startActivity(in1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    public String getRealPathFromURI(Uri contentUri) {
+        //Para obtener la URL de donde se guarda la imagen
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+    private void goTocamera(){
+        //busco en la galeria
+        values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Photo taken on " + System.currentTimeMillis());
+        imageUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent cameraIntent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(cameraIntent,REQUEST_IMAGE_CAMERA);
+
+    }
     //Metodo que se encarga de llamar a la API
-    public void obtenerReportes(String authHeader) {
-        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReportes(authHeader);
+    public void obtenerReportes() {
+        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,idUsuario);
         listR.enqueue(new Callback<List<Reportes>>() {
             @Override
             public void onResponse(Call<List<Reportes>> call, Response<List<Reportes>> response) {
@@ -106,19 +237,28 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
 
                     if(response.isSuccessful())
                     {
-                        Log.d("a","entreeeeeeeeeeeee");
-
                         //Aqui se carga la lista de reportes
                         listaFinalReportes = response.body();
+                        if(listaFinalReportes.size()<1)
+                        {
+                            Toast.makeText(SolicitudesActivity.this,"No tiene ningun Reporte",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            //Se envia la lista de reportes al adapter y se carga la interfaz que fue implementada
+                            recyclerAdapter = new RecyclerAdapter(listaFinalReportes,SolicitudesActivity.this);
+                            recyclerView.setAdapter(recyclerAdapter);
+                        }
                     }
                 }catch (NullPointerException e){
+                    Log.d("error",e.getLocalizedMessage());
                     //TODO: Capturar excepciones
                 }
             }
 
             @Override
             public void onFailure(Call<List<Reportes>> call, Throwable t) {
-                Log.e("Falloooo", t.getLocalizedMessage());
+                Log.e("Fallo", t.getLocalizedMessage());
             }
         });
     }
@@ -146,11 +286,12 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         String id = listaFinalReportes.get(position).getIdentificador();
         String descripcion = listaFinalReportes.get(position).getDescripcion();
         String fecha = listaFinalReportes.get(position).getFechaString();
-        String estado = listaFinalReportes.get(position).getEstado();
-        openSolicitudDialog(id, descripcion, fecha, estado);
+        //String estado = listaFinalReportes.get(position).getEstado();
+        Log.d("aa",id+" "+descripcion+" "+fecha);
+        openSolicitudDialog(id, descripcion, fecha);
     }
 
-    private void openSolicitudDialog(String id, String descripcion, String fecha, String estado) {
+    private void openSolicitudDialog(String id, String descripcion, String fecha) {
         setContentView(R.layout.solicitud_dialog);
         solicitud_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -163,11 +304,11 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         TextView estado_solicitud = solicitud_dialog.findViewById(R.id.estado_solicitud);
 
         //Se cargan las variables dentro del dialog
-        solicitud_title.setText(solicitud_title.getText()+id);
+        solicitud_title.setText(id);
         descripcion_solicitud.setText(descripcion);
         fecha_solicitud.setText(fecha);
 
-        switch(estado){
+       /* switch(estado){
             case "Finalizado":
                 estado_solicitud.setText(estado);
                 estado_solicitud.setBackgroundResource(R.drawable.login_button);
@@ -182,7 +323,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 break;
             default:
                 break;
-        }
+        }*/
 
         //Boton de aceptar cierra el dialog
         solicitud_button.setOnClickListener(new View.OnClickListener() {
