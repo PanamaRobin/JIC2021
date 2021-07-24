@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,10 +96,14 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     public static String id, descripcion,fecha,estado;
     String idUsuario;
 
+    ImageButton editarUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
+
+        editarUsuario=findViewById(R.id.editarUsuario);
 
         idUsuario = getIntent().getStringExtra("idUsuario");
         //Log.d("idUsuario",idUsuario);
@@ -150,6 +155,14 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 else{
                     goTocamera();
                 }
+            }
+        });
+        editarUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SolicitudesActivity.this,ActualizarUsuario.class);
+                intent.putExtra("idUsuario", idUsuario);
+                startActivity(intent);
             }
         });
     }

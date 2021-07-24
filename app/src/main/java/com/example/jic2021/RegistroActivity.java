@@ -127,6 +127,5 @@ public class RegistroActivity extends AppCompatActivity {
             registro();
         }
         return retorno;
-
     }
 }
