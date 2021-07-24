@@ -96,23 +96,18 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     public static String id, descripcion,fecha,estado;
     String idUsuario;
 
-    ImageButton editarUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
 
-        editarUsuario=findViewById(R.id.editarUsuario);
-
         idUsuario = getIntent().getStringExtra("idUsuario");
         //Log.d("idUsuario",idUsuario);
         obtenerReportes();
 
-
         //RecyclerView y RecyclerAdapter
         recyclerView = findViewById(R.id.solicitudesRecycler);
-
 
 
         //Inicializacion del dialog
@@ -120,7 +115,6 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
 
         //Inicializacion de la vista del adapter dentro del recyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         //Floating action buttons
         float1 = (FloatingActionButton) findViewById(R.id.new_button);
@@ -157,7 +151,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 }
             }
         });
-        editarUsuario.setOnClickListener(new View.OnClickListener() {
+        float2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SolicitudesActivity.this,ActualizarUsuario.class);
