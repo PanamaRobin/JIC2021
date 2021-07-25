@@ -4,13 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistroActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#E5E5E5"
-        android:scaleType="centerCrop"/>
+    tools:context=".RegistroActivity"
+    android:background="#E5E5E5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -292,14 +287,13 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/blue_button"
                 android:elevation="5dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_semibold"
                 android:inputType="text"
                 android:onClick="add"
-                android:paddingTop="11dp"
-                android:paddingBottom="11dp"
+                android:paddingVertical="10dp"
                 android:text="Registrarse"
                 android:textColor="#FFFFFF"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:backgroundTint="#030CBD" />
 
@@ -313,14 +307,12 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/red_button"
                 android:elevation="5dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_semibold"
                 android:inputType="text"
-                android:paddingTop="11dp"
-                android:paddingBottom="11dp"
+                android:paddingVertical="10dp"
                 android:text="Cancelar"
                 android:textColor="#FFFFFF"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                android:textSize="16sp"
                 app:backgroundTint="#BB1818" />
 
         </LinearLayout>

@@ -240,7 +240,8 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     }
     //Metodo que se encarga de llamar a la API
     public void obtenerReportes() {
-        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,idUsuario);
+        //Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,idUsuario);
+        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,"7-123-1234");
         listR.enqueue(new Callback<List<Reportes>>() {
             @Override
             public void onResponse(Call<List<Reportes>> call, Response<List<Reportes>> response) {
@@ -304,21 +305,21 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
 
     public void openSolicitudDialog() {
 
-        //setContentView(R.layout.solicitud_dialog);
-        //solicitud_dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        solicitud_dialog1.setContentView(R.layout.solicitud_dialog);
+        solicitud_dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        /*AlertDialog.Builder builder= new AlertDialog.Builder(this);
         View dia= getLayoutInflater().inflate(R.layout.solicitud_dialog,null);
-        builder.setView(dia);
+        builder.setView(dia);*/
         //dia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         Log.d("aa",id+" "+descripcion+" "+fecha+" "+estado);
         //Declaracion de elementos dentro del dialog
-        ImageView solicitud_image = dia.findViewById(R.id.solicitud_image);
-        Button solicitud_button = dia.findViewById(R.id.aceptar_btn);
-        TextView solicitud_title = dia.findViewById(R.id.solicitud_title);
-        TextView descripcion_solicitud = dia.findViewById(R.id.descripcion_solicitud);
-        TextView fecha_solicitud = dia.findViewById(R.id.fecha_solicitud);
-        TextView estado_solicitud = dia.findViewById(R.id.estado_solicitud);
+        ImageView solicitud_image = solicitud_dialog1.findViewById(R.id.solicitud_image);
+        Button solicitud_button = solicitud_dialog1.findViewById(R.id.aceptar_btn);
+        TextView solicitud_title = solicitud_dialog1.findViewById(R.id.solicitud_title);
+        TextView descripcion_solicitud = solicitud_dialog1.findViewById(R.id.descripcion_solicitud);
+        TextView fecha_solicitud = solicitud_dialog1.findViewById(R.id.fecha_solicitud);
+        TextView estado_solicitud = solicitud_dialog1.findViewById(R.id.estado_solicitud);
 
         //Se cargan las variables dentro del dialog
         solicitud_title.setText(id);
@@ -343,21 +344,21 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         }
 
         //Boton de aceptar cierra el dialog
-        /*solicitud_button.setOnClickListener(new View.OnClickListener() {
+        solicitud_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 solicitud_dialog1.dismiss();
             }
-        });*/
+        });
         //Este crea un botoncito feo a parte inferior izquierda pero funciona xd
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        /*builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
-        });
-        builder.create().show();
+        });*/
+        //builder.create().show();
         //Despliegue del dialog
-        //solicitud_dialog1.show();
+        solicitud_dialog1.show();
     }
 }

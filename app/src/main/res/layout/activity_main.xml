@@ -4,13 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#E5E5E5"
-        android:scaleType="centerCrop"/>
+    tools:context=".MainActivity"
+    android:background="#E5E5E5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -138,14 +133,12 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/login_button"
                 android:elevation="5dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="16sp"
                 android:inputType="text"
                 android:onClick="agregar"
-                android:paddingTop="11dp"
-                android:paddingBottom="11dp"
                 android:text="Iniciar Sesión"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
                 app:backgroundTint="#1BA628" />
 
             <TextView
@@ -169,13 +162,11 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/register_button"
                 android:elevation="5dp"
-                android:fontFamily="@font/poppins"
-                android:paddingTop="11dp"
-                android:paddingBottom="11dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="16sp"
                 android:text="Registrarse"
                 android:inputType="text"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
                 app:backgroundTint="#030CBD" />
 
             <Button

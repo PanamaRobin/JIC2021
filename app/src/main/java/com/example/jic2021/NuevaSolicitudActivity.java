@@ -29,6 +29,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,9 +82,9 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
      *
      * @param savedInstanceState
      */
-    TextView tvBotoncambiar;
-    TextView tvBotoncancelar;
-    TextView tvBotonenviar;
+    Button tvBotoncambiar;
+    Button tvBotoncancelar;
+    Button tvBotonenviar;
 
     EditText descripcion;
 
@@ -128,9 +129,9 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
 
 
         picture = findViewById(R.id.picture);
-        tvBotoncambiar = (TextView) findViewById(R.id.textViewcambiar);
-        tvBotoncancelar = (TextView) findViewById(R.id.textViewcancelar);
-        tvBotonenviar = (TextView) findViewById(R.id.textViewenviar);
+        tvBotoncambiar = findViewById(R.id.textViewcambiar);
+        tvBotoncancelar = findViewById(R.id.textViewcancelar);
+        tvBotonenviar = findViewById(R.id.textViewenviar);
         descripcion= (EditText) findViewById(R.id.descripcion);
 
         //Recibo la imagen
