@@ -80,8 +80,8 @@
             android:clickable="true"
             android:focusable="true"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/new_button"
-            app:layout_constraintEnd_toEndOf="@+id/new_button"
+            app:layout_constraintBottom_toTopOf="@+id/logout_button"
+            app:layout_constraintEnd_toEndOf="@+id/logout_button"
             app:srcCompat="@drawable/camera_asset" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -95,6 +95,18 @@
             app:layout_constraintBottom_toTopOf="@+id/camera_button"
             app:layout_constraintEnd_toEndOf="@+id/camera_button"
             app:srcCompat="@drawable/user_asset" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/new_button"
+            app:layout_constraintEnd_toEndOf="@+id/new_button"
+            app:srcCompat="@drawable/logout_asset" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

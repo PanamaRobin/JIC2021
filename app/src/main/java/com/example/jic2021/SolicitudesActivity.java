@@ -64,7 +64,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     //Dialog que despliega los datos de la solicitud
     Dialog solicitud_dialog1;
 
-    FloatingActionButton float1, float2, float3;
+    FloatingActionButton float1, float2, float3, float4;
     Animation closeAnim, openAnim, fromBottom, toBottom;
 
     //Declaracion de RecyclerView de la vista
@@ -120,6 +120,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         float1 = (FloatingActionButton) findViewById(R.id.new_button);
         float2 = (FloatingActionButton) findViewById(R.id.profile_button);
         float3 = (FloatingActionButton) findViewById(R.id.camera_button);
+        float4 = (FloatingActionButton) findViewById(R.id.logout_button);
 
         //Animations
         closeAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim);
@@ -151,11 +152,22 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 }
             }
         });
+
+        //Para el perfil de usuario
         float2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SolicitudesActivity.this,ActualizarUsuario.class);
                 intent.putExtra("idUsuario", idUsuario);
+                startActivity(intent);
+            }
+        });
+
+        //Para cerrar sesion
+        float4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SolicitudesActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -241,7 +253,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     //Metodo que se encarga de llamar a la API
     public void obtenerReportes() {
         //Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,idUsuario);
-        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,"7-123-1234");
+        Call<List<Reportes>> listR=ApiConnection.obtReportes().listaReport(authHeader,idUsuario);
         listR.enqueue(new Callback<List<Reportes>>() {
             @Override
             public void onResponse(Call<List<Reportes>> call, Response<List<Reportes>> response) {
@@ -281,11 +293,13 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
             float1.startAnimation(openAnim);
             float2.startAnimation(fromBottom);
             float3.startAnimation(fromBottom);
+            float4.startAnimation(fromBottom);
             isVisible = false;
         }else{
             float1.startAnimation(closeAnim);
             float2.startAnimation(toBottom);
             float3.startAnimation(toBottom);
+            float4.startAnimation(toBottom);
             isVisible = true;
         }
 
