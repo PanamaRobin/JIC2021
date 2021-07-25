@@ -42,8 +42,8 @@ android:orientation para configurar si es vertical u horizontal-->
 
         <ImageView
             android:id="@+id/picture"
-            android:layout_width="138dp"
-            android:layout_height="96dp"
+            android:layout_width="98dp"
+            android:layout_height="135dp"
             android:layout_marginTop="15dp"
             android:layout_marginStart="3dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@ android:orientation para configurar si es vertical u horizontal-->
             android:layout_height="40dp"
             android:background="@drawable/blue_button"
             android:elevation="3dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="55dp"
             android:layout_marginStart="30dp"
             android:hint="Cambiar"
             android:fontFamily="@font/poppins_semibold"

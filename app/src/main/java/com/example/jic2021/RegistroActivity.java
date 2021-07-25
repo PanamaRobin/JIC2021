@@ -2,8 +2,11 @@ package com.example.jic2021;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -22,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegistroActivity extends AppCompatActivity {
+    Dialog dialog_exitoso;
     Button cancelar,registrar;
     EditText cedula, correo, telefono, pass, nombre;
     public String base = "user" + ":" + "admin";
@@ -92,7 +96,8 @@ public class RegistroActivity extends AppCompatActivity {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
-    private void registroDialogo(){
+    //Dialog nativo descartado
+    /*private void registroDialogo(){
         new AlertDialog.Builder(this)
                 .setTitle("Todo Listo!")
                 .setMessage("Registro Exitoso!")
@@ -103,6 +108,23 @@ public class RegistroActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }*/
+    //Custom dialog
+    private void registroDialogo(){
+        dialog_exitoso.setContentView(R.layout.activity_exitoso);
+        dialog_exitoso.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button registro_button = dialog_exitoso.findViewById(R.id.aceptar);
+
+        registro_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_exitoso.dismiss();
+                finish();
+            }
+        });
+
+        dialog_exitoso.show();
     }
     public boolean validacion(){
         boolean retorno = true;
