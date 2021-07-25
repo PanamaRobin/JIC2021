@@ -19,13 +19,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -41,8 +44,19 @@ import com.example.jic2021.entities.Reportes;
 import com.example.jic2021.entities.Usuarios;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.apache.commons.net.ftp.FTPClient;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.SocketException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,6 +102,9 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
     public ContentValues values;
     public Uri imageUri;
     public static Bitmap bitmap;
+
+    public static InputStream input;
+
     String imageurl;
     String currentPhotoPath;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -171,6 +188,13 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 startActivity(intent);
             }
         });
+        //permisos para el ftp
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
     }
     //Camara
     @Override
@@ -313,11 +337,45 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         descripcion = listaFinalReportes.get(position).getDescripcion();
         fecha = listaFinalReportes.get(position).getFechaString();
         estado = listaFinalReportes.get(position).getEstado();
-        Log.d("aa",id+" "+descripcion+" "+fecha+" "+estado);
-        openSolicitudDialog();
-    }
 
-    public void openSolicitudDialog() {
+        //Mapeo el URL
+        String str = listaFinalReportes.get(position).getImagen();
+        String[] arrOfStr = str.split("ftp://192.168.0.13/");
+        String b = TextUtils.join("", arrOfStr);
+
+        Log.d("url imagen",str);
+        Log.d("string imagen",b);
+
+        InputStream im;
+        im=obtImagen(str,b);
+
+        //Log.d("ob",bitmap.toString());
+        openSolicitudDialog(im);
+    }
+    public InputStream obtImagen(String urlImagen, String imagen){
+        //Create FTPClient object
+        String server = "192.168.0.13";
+        String user = "admin";
+        String pass = "josejose";
+
+
+        URL url = null;
+        try {
+            String ftpUrl = "ftp://%s:%s@%s/%s";
+            ftpUrl = String.format(ftpUrl, user, pass, server,imagen );
+
+            url = new URL(ftpUrl);
+            URLConnection urlConnection =url.openConnection();
+            urlConnection.setDoInput(true);
+            input = urlConnection.getInputStream();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return input;
+    }
+    public void openSolicitudDialog(InputStream im) {
 
         solicitud_dialog1.setContentView(R.layout.solicitud_dialog);
         solicitud_dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -339,6 +397,11 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
         solicitud_title.setText(id);
         descripcion_solicitud.setText(descripcion);
         fecha_solicitud.setText(fecha);
+
+        Bitmap otro;
+        otro=BitmapFactory.decodeStream(im);
+
+        solicitud_image.setImageBitmap(otro);
 
        switch(estado){
             case "Finalizado":

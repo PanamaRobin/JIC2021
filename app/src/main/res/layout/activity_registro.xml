@@ -289,7 +289,6 @@
                 android:elevation="5dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:inputType="text"
-                android:onClick="add"
                 android:paddingVertical="10dp"
                 android:text="Registrarse"
                 android:textColor="#FFFFFF"

@@ -112,7 +112,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         user.setTelefono(AES.encrypt(telefono.getText().toString(),"64aes64"));
         user.setActivo(true);
         if(Npass.getText().toString().isEmpty()){
-            user.setContrasena(usuarioAnterior.getContrasena());
+            user.setContrasena(AES.encrypt(usuarioAnterior.getContrasena(),"64aes64"));
         }
         else{
             user.setContrasena(AES.encrypt(Npass.getText().toString(),"64aes64"));

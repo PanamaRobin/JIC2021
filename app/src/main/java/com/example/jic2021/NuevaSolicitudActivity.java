@@ -163,7 +163,9 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
         tvBotoncancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NuevaSolicitudActivity.this, SolicitudesActivity.class));
+                Intent in1 = new Intent(NuevaSolicitudActivity.this, SolicitudesActivity.class);
+                in1.putExtra("idUsuario",idUsuario);
+                startActivity(in1);
             }
         });
         //permisos para el ftp

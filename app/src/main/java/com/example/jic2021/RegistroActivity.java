@@ -22,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegistroActivity extends AppCompatActivity {
-    Button cancelar;
+    Button cancelar,registrar;
     EditText cedula, correo, telefono, pass, nombre;
     public String base = "user" + ":" + "admin";
     public final String authHeader = "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
@@ -35,11 +35,18 @@ public class RegistroActivity extends AppCompatActivity {
         correo = findViewById(R.id.et_regcorreo);
         telefono = findViewById(R.id.et_regtelefono);
         pass = findViewById(R.id.et_regcontraseña);
+        registrar=findViewById(R.id.regregistro);
         cancelar = findViewById(R.id.regcancelar);/**Se conecta la variable creada con el id del botón correspondiente*/
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegistroActivity.this, MainActivity.class));
+            }
+        });
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add();
             }
         });
     }
@@ -71,7 +78,7 @@ public class RegistroActivity extends AppCompatActivity {
         });
 
     }
-    public void add(View v){
+    public void add(){
         if(validacion()){
             if(!validarEmail(correo.getText().toString())){
                 Toast.makeText(this, "Correo incorrecto", Toast.LENGTH_LONG).show();
@@ -123,8 +130,6 @@ public class RegistroActivity extends AppCompatActivity {
         if(c5.isEmpty()){
             pass.setError("Introduzca su contraseña!");
             retorno=false;
-        }else{
-            registro();
         }
         return retorno;
     }
