@@ -408,7 +408,7 @@ public class SolicitudesActivity extends AppCompatActivity implements RecyclerAd
                 estado_solicitud.setText(estado);
                 estado_solicitud.setBackgroundResource(R.drawable.login_button);
                 break;
-            case "Nuevo":
+            case "Pendiente":
                 estado_solicitud.setText(estado);
                 estado_solicitud.setBackgroundResource(R.drawable.yellow_rounded_button);
                 break;

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -89,6 +92,8 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
     EditText descripcion;
 
     ImageView picture;
+
+    Dialog dialog_exitoso;
 
     private static final int REQUEST_PERMISSION_CAMERA = 100;
     private static final int REQUEST_IMAGE_CAMERA = 101;
@@ -193,6 +198,8 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
                 }
             }
         });
+        //Inicializacion del dialog
+        dialog_exitoso = new Dialog(this);
     }
 
     //Mapa
@@ -468,7 +475,7 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
         });
 
     }
-    public void registroDialogo(){
+    /*public void registroDialogo(){
         new AlertDialog.Builder(this)
                 .setTitle("Todo Listo!")
                 .setMessage("El Reporte ha sido enviado con exito!")
@@ -481,5 +488,26 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
                     }
                 })
                 .show();
+    }*/
+
+    //Custom dialog
+    private void registroDialogo() {
+        dialog_exitoso.setContentView(R.layout.activity_exitoso);
+        dialog_exitoso.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button registro_button = dialog_exitoso.findViewById(R.id.aceptar);
+
+        registro_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Descomentar si no se cierra el dialog al iniciar la otra actividad
+                //dialog_exitoso.dismiss();
+                Intent intent = new Intent(NuevaSolicitudActivity.this, SolicitudesActivity.class);
+                intent.putExtra("idUsuario", idUsuario);
+                startActivity(intent);
+            }
+        });
+
+        dialog_exitoso.show();
     }
 }

@@ -1,8 +1,11 @@
 package com.example.jic2021;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Patterns;
@@ -28,6 +31,8 @@ public class ActualizarUsuario extends AppCompatActivity {
     EditText  correo, telefono, Npass, nombre;
     TextView cedula;
 
+    Dialog dialog_exitoso;
+
     Usuarios usuarioAnterior= new Usuarios();
     Usuarios usuarioNuevo= new Usuarios();
 
@@ -50,6 +55,8 @@ public class ActualizarUsuario extends AppCompatActivity {
         //Obtengo los datos anteriores del usuario
         usuarioAnterior=UsuarioAnterior(idUsuario);
 
+        //Inicializacion del dialog
+        dialog_exitoso = new Dialog(this);
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +81,26 @@ public class ActualizarUsuario extends AppCompatActivity {
             }
         });
 
+    }
+    //Custom dialog
+    private void registroDialogo() {
+        dialog_exitoso.setContentView(R.layout.activity_exitoso);
+        dialog_exitoso.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button registro_button = dialog_exitoso.findViewById(R.id.aceptar);
+        TextView texto = dialog_exitoso.findViewById(R.id.registro_text);
+
+        texto.setText("Actualización Exitosa!");
+
+        registro_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_exitoso.dismiss();
+                finish();
+            }
+        });
+
+        dialog_exitoso.show();
     }
     public Usuarios UsuarioAnterior(String id)
     {
@@ -149,7 +176,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         }
         return retorno;
     }
-    private void registroDialogo(){
+    /*private void registroDialogo(){
         new AlertDialog.Builder(this)
                 .setTitle("Todo Listo!")
                 .setMessage("Usuario Actualizado!")
@@ -160,5 +187,5 @@ public class ActualizarUsuario extends AppCompatActivity {
                     }
                 })
                 .show();
-    }
+    }*/
 }
