@@ -475,6 +475,7 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
         });
 
     }
+    //Dialog nativo descartadoo
     /*public void registroDialogo(){
         new AlertDialog.Builder(this)
                 .setTitle("Todo Listo!")
@@ -490,8 +491,8 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
                 .show();
     }*/
 
-    //Custom dialog
-    private void registroDialogo() {
+
+    private void registroDialogo(){
         dialog_exitoso.setContentView(R.layout.activity_exitoso);
         dialog_exitoso.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -502,7 +503,9 @@ public class NuevaSolicitudActivity extends AppCompatActivity implements OnMapRe
             public void onClick(View v) {
                 //Descomentar si no se cierra el dialog al iniciar la otra actividad
                 //dialog_exitoso.dismiss();
+
                 Intent intent = new Intent(NuevaSolicitudActivity.this, SolicitudesActivity.class);
+
                 intent.putExtra("idUsuario", idUsuario);
                 startActivity(intent);
             }

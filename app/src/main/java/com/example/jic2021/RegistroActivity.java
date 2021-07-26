@@ -98,6 +98,7 @@ public class RegistroActivity extends AppCompatActivity {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
+    //Dialog nativo descartadoo
     /*private void registroDialogo(){
         new AlertDialog.Builder(this)
                 .setTitle("Todo Listo!")
@@ -110,6 +111,7 @@ public class RegistroActivity extends AppCompatActivity {
                 })
                 .show();
     }*/
+    //Custom dialog
     private void registroDialogo(){
         dialog_exitoso.setContentView(R.layout.activity_exitoso);
         dialog_exitoso.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
