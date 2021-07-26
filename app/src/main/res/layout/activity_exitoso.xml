@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="314dp"
+
+    android:layout_height="300dp"
+    android:background="@drawable/white_button"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="25dp">
+
+    <ImageView
+        android:id="@+id/check"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:background="@drawable/completed_asset"
+        android:backgroundTint="#4CBB18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/registro_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Registro Exitoso!"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@+id/check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <android.widget.Button
+        android:id="@+id/aceptar"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:background="@drawable/green_button"
+        android:elevation="3dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:inputType="text"
+        android:hint="Aceptar"
+        android:textColorHint="#FFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
